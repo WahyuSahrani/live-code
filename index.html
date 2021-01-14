@@ -21,9 +21,10 @@
                 resize: none;
                 outline: none;
                 width: 100%;
-                height: 33.33%;
+                height: 100%;
                 font-size: 18px;
                 padding: 10px;
+                font-family: "Courier New";
             }
             .preview-area {
                 width: 50%;
@@ -31,32 +32,36 @@
             .preview-area iframe {
                 width: 100%;
                 height: 100%;
-                border: 1px;
-                background-color: aquamarine;
+            }
+            .button {
+                padding: 10px;
+                color: chartreuse;
             }
         </style>
     </head>
     <body>
+        
         <div class="code-area">
-            <textarea id="htmlCode" placeholder="Ketikan Kode HTML disini" oninput="showPreview()"></textarea>
-            <textarea id="cssCode" placeholder="Ketikan Kode CSS disini" oninput="showPreview()"></textarea>
-            <textarea id="jsCode" placeholder="Ketikan Kode JavaScript disini" oninput="showPreview()"></textarea>				
+            <textarea id="htmlCode" placeholder="Ketikan Kode HTML disini" onclick="showPreview()"></textarea>
+        </div>
+        
+        <div class="button">            
+            <button onclick="showPreview()"> <img src="green-play-button-png.png" alt="RUN" width="30px" height="30px"> </button>
         </div>
         
         <div class="preview-area">
-            <h1 style="text-align: center;">Preview Area</h1>
             <iframe id="preview-window"></iframe>
         </div>
         
     </body>
     <script>
-        function showPreview(){
+    function showPreview(){
         var htmlCode = document.getElementById("htmlCode").value;
-        var cssCode = "<style>"+document.getElementById("cssCode").value+"</style>";
-        var jsCode = "<scri"+"pt>"+document.getElementById("jsCode").value+"</scri"+"pt>";
+        // var cssCode = "<style>"+document.getElementById("cssCode").value+"</style>";
+        // var jsCode = "<scri"+"pt>"+document.getElementById("jsCode").value+"</scri"+"pt>";
         var frame = document.getElementById("preview-window").contentWindow.document;
         frame.open();
-        frame.write(htmlCode+cssCode+jsCode);
+        frame.write(htmlCode);
         frame.close();
     }
     </script>
