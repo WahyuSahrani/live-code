@@ -1,68 +1,44 @@
-<html>
-    <head>
-        <title>Live Code</title>
-        <style>
-            * {
-                margin: 0px;
-                padding: 0px;
-                box-sizing: border-box;
-            }
-            body {
-                height: 100vh;
-                display: flex;
-            }
-            .code-area {
-                display: flex;
-                flex-direction:column;
-                width: 50%;
-                border-right:1px solid #555;
-            }
-            .code-area textarea {
-                resize: none;
-                outline: none;
-                width: 100%;
-                height: 100%;
-                font-size: 12px;
-                padding: 10px;
-                font-family: "Courier New";
-            }
-            .preview-area {
-                width: 50%;
-            }
-            .preview-area iframe {
-                width: 100%;
-                height: 100%;
-            }
-            .button {
-                padding: 10px;
-                color: chartreuse;
-            }
-        </style>
-    </head>
-    <body>
-        
-        <div class="code-area">
-            <textarea id="htmlCode" placeholder="Ketikan Kode HTML disini" onclick="showPreview()"></textarea>
+<!doctype html>
+<html lang="en">
+	<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+	
+	<title>Live Code</title>
+	<style>
+		textarea {
+			font-size: 12px;
+			font-family: "Courier New";
+		}
+	</style>
+	</head>
+	<body>
+
+		<div class="mb-3">
+			<textarea class="form-control fs-6" id="htmlCode" rows="10" placeholder="Ketikan Kode HTML Disini" onclick="showPreview()"></textarea>
+		</div>	
+
+		<div class="d-grid">
+			<button onclick="showPreview()" class="btn btn-success" type="button">Button</button>
+		</div>
+
+		<div class="preview-area pt-2">
+            <iframe id="preview-window" style="width: 100%;"></iframe>
         </div>
-        
-        <div class="button">            
-            <button onclick="showPreview()"> <img src="green-play-button-png.png" alt="RUN" width="30px" height="30px"> </button>
-        </div>
-        
-        <div class="preview-area">
-            <iframe id="preview-window"></iframe>
-        </div>
-        
-    </body>
-    <script>
-    function showPreview(){
-        var htmlCode = document.getElementById("htmlCode").value;
-        // var cssCode = "<style>"+document.getElementById("cssCode").value+"</style>";
-        // var jsCode = "<scri"+"pt>"+document.getElementById("jsCode").value+"</scri"+"pt>";
-        var frame = document.getElementById("preview-window").contentWindow.document;
-        frame.open();
-        frame.write(htmlCode);
-        frame.close();
-    }
-    </script>
+
+		<script>
+			function showPreview(){
+				var htmlCode = document.getElementById("htmlCode").value;
+				// var cssCode = "<style>"+document.getElementById("cssCode").value+"</style>";
+				// var jsCode = "<scri"+"pt>"+document.getElementById("jsCode").value+"</scri"+"pt>";
+				var frame = document.getElementById("preview-window").contentWindow.document;
+				frame.open();
+				frame.write(htmlCode);
+				frame.close();
+			}
+			</script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+	</body>
 </html>
