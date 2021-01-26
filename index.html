@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+	<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+	
+	<title>Live Code</title>
+	<style>
+		textarea {
+			resize: none;
+			font-size: 12px;
+			font-family: "Courier New";
+			height: 50%;
+		}
+
+		.preview-area iframe {
+			width: 100%;
+			height: 50%;
+		}
+		
+	</style>
+	</head>
+	<body>
+		
+		  <!-- Columns are always 50% wide, on mobile and desktop -->
+		  	<div class="row">
+				<textarea class="form-control fs-6" id="htmlCode" rows="10" placeholder="Ketikan Kode HTML Disini" onclick="showPreview()"></textarea>
+				<div class="input-group mb-2 mt-2">
+					<input type="text" id="filenamehtml" class="form-control" placeholder="Ketikan nama file disini">
+					<button class="btn btn-success" id="download-html" type="button"> Download </button>
+				</div>
+		  
+				<textarea class="form-control fs-6" id="jsCode" rows="3" placeholder="Ketikan Kode JavaScript Disini" onclick="showPreview()"></textarea>
+				<div class="input-group mb-2 mt-2">
+					<input type="text" id="filenamejs" class="form-control" placeholder="Ketikan nama file JS disini">
+					<button class="btn btn-success" id="download-js" type="button"> Download </button>
+				</div>
+				</div>
+		    </div>
+		 
+					
+
+		<div class="d-grid mb-2">
+			<button onclick="showPreview()" class="btn btn-success" type="button">RUN</button>
+		</div>
+
+		<!-- <div class="input-group mb-3">
+			<input type="text" id="filename" class="form-control" placeholder="Ketikan nama file disini">
+			<button class="btn btn-success" id="download-btn" type="button">Download</button>
+		</div> -->
+
+		<div class="form-control">
+			<div class="preview-area">
+				<iframe id="preview-window" style="height: 300px;"></iframe>
+			</div>
+		</div>
+		
+
+		<script>
+			function showPreview(){
+				var htmlCode = document.getElementById("htmlCode").value;
+				// var cssCode = "<style>"+document.getElementById("cssCode").value+"</style>";
+				var jsCode = "<scri"+"pt>"+document.getElementById("jsCode").value+"</scri"+"pt>";
+				var frame = document.getElementById("preview-window").contentWindow.document;
+				frame.open();
+				frame.write(htmlCode+jsCode);
+				frame.close();
+			}
+
+			function download(filenamehtml, text){
+				var element = document.createElement('a');
+				element.style.display = "none";
+				
+				//define the data of the file using encodeURIComponent
+				element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+
+				//add the download attribute  of the hidden link
+				element.setAttribute('download', filenamehtml);
+				document.body.appendChild(element);
+
+				//simulate click of the created link
+				element.click();
+				document.body.removeChild(element);
+			}
+
+			function downloadjs(filenamejs, text){
+				var element = document.createElement('a');
+				element.style.display = "none";
+				
+				//define the data of the file using encodeURIComponent
+				element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+
+				//add the download attribute  of the hidden link
+				element.setAttribute('downloadjs', filenamejs);
+				document.body.appendChild(element);
+
+				//simulate click of the created link
+				element.click();
+				document.body.removeChild(element);
+			}
+
+			//when the user click the download button, start download 
+			//start file download
+			document.getElementById("download-html").addEventListener("click", function() {
+				//generate download of file with some content
+				var text = document.getElementById("htmlCode").value;
+				var filename = document.getElementById("filenamehtml").value;
+
+				download(filename, text);
+			}, false);
+
+			document.getElementById("download-js").addEventListener("click", function() {
+				//generate download of file with some content
+				var text = document.getElementById("jsCode").value;
+				var filename = document.getElementById("filenamejs").value;
+
+				download(filename, text);
+			}, false);
+			</script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+	</body>
+</html>
